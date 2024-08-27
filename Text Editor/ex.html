@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        #editor {
+            width: 100%;
+            height: 200px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            outline: none;
+        }
+        .highlight {
+            color: blue; /* Highlight color for selected text */
+        }
+    </style>
+</head>
+<body>
+
+<div id="editor" contenteditable="true">
+    Select some text here to keep it highlighted until you select something new.
+</div>
+<i id="increaseSize" class="bi bi-plus-square" style="font-size: 24px; cursor: pointer;"></i>
+<h1>Chetan Sahu</h1>
+<script>
+    let currentHighlight = null;
+
+    function clearHighlight() {
+        if (currentHighlight) {
+            currentHighlight.classList.remove('highlight');
+            currentHighlight = null;
+        }
+    }
+
+    function getSelectedText() {
+        let selectedText = '';
+        let parentElement = null;
+        
+        if (window.getSelection) {
+            const selection = window.getSelection();
+            
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                selectedText = selection.toString();
+                console.log("Range: ",range)
+                parentElement = range.commonAncestorContainer;
+                console.log(parentElement)
+                if (parentElement.nodeType === 3) { // If it's a text node
+                    parentElement = parentElement.parentNode;
+                }
+            }
+        }
+        
+        return { selectedText, parentElement };
+    }
+
+    document.getElementById('editor').addEventListener('mouseup', function() {
+        const { selectedText, parentElement } = getSelectedText();
+        
+        if (selectedText) {
+            clearHighlight();
+            parentElement.classList.add('highlight');
+            currentHighlight = parentElement;
+        }
+    });
+
+    document.getElementById('increaseSize').addEventListener('click', function() {
+        if (currentHighlight) {
+            let fontSize = parseFloat(window.getComputedStyle(currentHighlight).fontSize);
+            currentHighlight.style.fontSize = (fontSize + 2) + 'px';
+        } else {
+            console.log('No text selected.');
+        }
+    });
+</script>
+
+</body>
+</html>
