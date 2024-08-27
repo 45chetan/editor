@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title>Text Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(#3d0066,#2e004d);
+        }
+        .i1 {
+            font-size: 25px;
+            position: relative; /* Important for positioning the popup box */
+            cursor: pointer;
+        }
+
+        .popup-box {
+            display: none;
+            position: absolute;
+            bottom: 100%; /* Position the box above the icon */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 1;
+        }
+        .i1:hover .popup-box {
+            display: block;
+            opacity: 1;
+        }
+        .popup-box {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        select
+        {
+            width: 150px;
+            border-radius: 50px;
+            height: 30px;
+        }
+        #editor {
+            width: 100%;
+            height: 320px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px; /* Default font size */
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5 text-center" style="height: 500px;width: 820px;background: transparent;border: 2px solid white;">
+        <h1 style="color: white;">Text <span style="color: #ad33ff;text-decoration: underline;text-decoration-color: #ad33ff;">Editor</span></h1>
+        <div class="mt-3 text-center" style="background: white;border: 2px solid #ad33ff;border-radius: 50px;height: 60px;">
+            <li style="display: flex;text-decoration: none;">
+                <ul class="mt-3 i1">
+                    <select name="Font-Family" class="" id="select" style="font-size: 16px;">
+                        <option value="Arial" style="font-family: Calibri;">Calibri</option>
+                        <option value="Arial" style="font-family: Arial;">Arial</option>
+                        <option value="Verdana" style="font-family: Verdana;">Verdana</option>
+                        <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
+                        <option value="Georgia" style="font-family: Georgia;">Georgia</option>
+                        <option value="Courier New" style="font-family: 'Courier New';">Courier New</option>
+                        <option value="Tahoma" style="font-family: Tahoma;">Tahoma</option>
+                        <option value="Trebuchet MS" style="font-family: 'Trebuchet MS';">Trebuchet MS</option>
+                        <option value="Lucida Sans" style="font-family: 'Lucida Sans';">Lucida Sans</option>
+                        <option value="Garamond" style="font-family: Garamond;">Garamond</option>
+                        <option value="Comic Sans MS" style="font-family: 'Comic Sans MS';">Comic Sans MS</option>
+                    </select>
+                    <div class="popup-box">Font-Family</div>
+                </ul>
+                <ul class="mt-3 i1" id="MyUl">
+                    <i class="bi bi-plus-square"></i>
+                    <div class="popup-box">Increase Font Size</div>
+                </ul>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-dash-square"></i>
+                    <div class="popup-box">Decrease Font Size</div>
+                </ul>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-type-bold"></i>
+                    <div class="popup-box">Bold Text</div>
+                </ul>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-type-italic"></i>
+                    <div class="popup-box">Italic Font</div>
+                </ul>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-type-underline"></i>
+                    <div class="popup-box">underline</div>
+                </ul>
+                <div class="i1">
+                    <input class="mt-3 ms-4" type="color" id="colors">
+                    <div class="popup-box">Text Color</div>
+                </div>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <div class="popup-box">Undo</div>
+                </ul>
+                <ul class="mt-3 i1">
+                    <i class="bi bi-arrow-clockwise"></i>
+                    <div class="popup-box">Redo</div>
+                </ul>
+            </li>
+        </div>
+        <div  class="mt-3">
+        <div  id="editor" contenteditable="true" class="mt-3" aria-placeholder="Enter Text Here...">
+            <p id="MyText"></p>
+        </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
